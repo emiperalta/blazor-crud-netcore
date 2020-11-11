@@ -1,2 +1,2 @@
 # blazor-crud-netcore
-CRUD operations with .NET Core API and Blazor.
+Blazor CRUD with .NET Core MVC API and SQL Server

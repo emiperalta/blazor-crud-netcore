@@ -10,14 +10,14 @@ using WebServiceBlazorCrud.Models.Request;
 
 namespace WebServiceBlazorCrud.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/people")]
     [ApiController]
     public class PeopleController : ControllerBase
     {
         [HttpGet]
         public IActionResult Get()
         {
-            Response res = new Response();
+            Response<List<Person>> res = new Response<List<Person>>();
 
             try
             {
@@ -39,7 +39,7 @@ namespace WebServiceBlazorCrud.Controllers
         [HttpGet("{id}")]
         public IActionResult GetOne(int? id)
         {
-            Response res = new Response();
+            Response<Person> res = new Response<Person>();
 
             try
             {
@@ -55,6 +55,7 @@ namespace WebServiceBlazorCrud.Controllers
                     }
 
                     res.Success = 1;
+                    res.Data = p;
                 }
             }
             catch (Exception ex)
@@ -68,7 +69,7 @@ namespace WebServiceBlazorCrud.Controllers
         [HttpPost]
         public IActionResult Add(PeopleRequest model)
         {
-            Response res = new Response();
+            Response<object> res = new Response<object>();
 
             try
             {
@@ -94,7 +95,7 @@ namespace WebServiceBlazorCrud.Controllers
         [HttpPut]
         public IActionResult Edit(PeopleRequest model)
         {
-            Response res = new Response();
+            Response<object> res = new Response<object>();
 
             try
             {
@@ -129,7 +130,7 @@ namespace WebServiceBlazorCrud.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Response res = new Response();
+            Response<object> res = new Response<object>();
 
             try
             {

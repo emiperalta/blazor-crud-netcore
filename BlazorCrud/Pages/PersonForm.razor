@@ -1,4 +1,5 @@
-﻿@page "/newperson"
+﻿@page "/personform"
+@page "/personform/{id:int}"
 
 @using BlazorCrud.Data
 @using System.Net.Http
@@ -7,7 +8,7 @@
 @inject HttpClient Http
 @inject NavigationManager NavigationManager
 
-<h3>Add people</h3>
+<h3>Add new person</h3>
 
 <EditForm Model="@person">
     <div class="container-fluid">
@@ -33,14 +34,37 @@
 </EditForm>
 
 @code {
-    public string url = "/api/People";
+    [Parameter]
+    public int id { get; set; } //match the {id:int} parameter
+
+    public string url = "/api/people";
     Person person = new Person();
-    Response res = new Response();
+    Response<object> res = new Response<object>();
+    Response<Person> resPerson = new Response<Person>();
 
     private async Task Save()
     {
-        var data = await Http.PostAsJsonAsync<Person>(url, person);
-        res = data.Content.ReadFromJsonAsync<Response>().Result;
+        if (id != 0)
+        {
+            var data = await Http.PutAsJsonAsync<Person>(url, person);
+            res = data.Content.ReadFromJsonAsync<Response<object>>().Result;
+        }
+        else
+        {
+            var data = await Http.PostAsJsonAsync<Person>(url, person);
+            res = data.Content.ReadFromJsonAsync<Response<object>>().Result;
+
+        }
+
         NavigationManager.NavigateTo("/people");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (id != 0)
+        {
+            resPerson = await Http.GetFromJsonAsync<Response<Person>>(url + "/" + id);
+            person = resPerson.Data;
+        }
     }
 }

@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/People",
+      "launchUrl": "api/people",
       "environmentVariables": {
         "DbConnection": "Server=localhost;Database=PeopleBlazorCrud;Trusted_Connection=True;",
         "ASPNETCORE_ENVIRONMENT": "Development"
@@ -21,7 +21,7 @@
     "WebServiceBlazorCrud": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/People",
+      "launchUrl": "api/people",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

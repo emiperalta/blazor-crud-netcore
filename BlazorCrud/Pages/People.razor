@@ -24,7 +24,7 @@
                 <td>@person.FirstName</td>
                 <td>@person.LastName</td>
                 <td>
-                    <a href="">Edit</a>
+                    <a href="personform/@person.Id">Edit</a>
                     <a href="">Delete</a>
                 </td>
             </tr>
@@ -39,9 +39,9 @@
 </div>
 
 @code {
-    public string url = "/api/People";
-    public Data.Response res = new Data.Response();
+    public string url = "/api/people";
+    public Data.Response<List<Person>> res = new Data.Response<List<Person>>();
 
     protected override async Task OnInitializedAsync() =>
-        res = await Http.GetFromJsonAsync<Data.Response>(url);
+        res = await Http.GetFromJsonAsync<Data.Response<List<Person>>>(url);
 }

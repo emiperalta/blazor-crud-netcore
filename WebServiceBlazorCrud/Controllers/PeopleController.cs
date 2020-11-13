@@ -45,7 +45,7 @@ namespace WebServiceBlazorCrud.Controllers
             {
                 using (PeopleBlazorCrudContext db = new PeopleBlazorCrudContext())
                 {
-                    People p = db.People.Find(id);
+                    Person p = db.People.Find(id);
 
                     if (p == null)
                     {
@@ -55,7 +55,6 @@ namespace WebServiceBlazorCrud.Controllers
                     }
 
                     res.Success = 1;
-                    res.Data = p;
                 }
             }
             catch (Exception ex)
@@ -75,14 +74,13 @@ namespace WebServiceBlazorCrud.Controllers
             {
                 using (PeopleBlazorCrudContext db = new PeopleBlazorCrudContext())
                 {
-                    People p = new People();
+                    Person p = new Person();
                     p.FirstName = model.FirstName;
                     p.LastName = model.LastName;
 
                     db.People.Add(p);
                     db.SaveChanges();
                     res.Success = 1;
-                    res.Data = p;
                 }
             }
             catch (Exception ex)
@@ -102,7 +100,7 @@ namespace WebServiceBlazorCrud.Controllers
             {
                 using (PeopleBlazorCrudContext db = new PeopleBlazorCrudContext())
                 {
-                    People p = db.People.Find(model.Id);
+                    Person p = db.People.Find(model.Id);
 
                     if (p == null)
                     {
@@ -118,7 +116,6 @@ namespace WebServiceBlazorCrud.Controllers
                     db.SaveChanges();
                     res.Success = 1;
                     res.Message = "Successfully updated";
-                    res.Data = p;
                 }
             }
             catch (Exception ex)
@@ -138,7 +135,7 @@ namespace WebServiceBlazorCrud.Controllers
             {
                 using (PeopleBlazorCrudContext db = new PeopleBlazorCrudContext())
                 {
-                    People p = db.People.Find(id);
+                    Person p = db.People.Find(id);
 
                     if (p == null)
                     {

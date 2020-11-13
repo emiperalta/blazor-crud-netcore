@@ -17,7 +17,7 @@ namespace WebServiceBlazorCrud.Models
         {
         }
 
-        public virtual DbSet<People> People { get; set; }
+        public virtual DbSet<Person> People { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,7 +29,7 @@ namespace WebServiceBlazorCrud.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<People>(entity =>
+            modelBuilder.Entity<Person>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
 

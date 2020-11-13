@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-#nullable disable
-
-namespace WebServiceBlazorCrud.Models
+namespace BlazorCrud.Data
 {
-    public partial class People
+    public class Person
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

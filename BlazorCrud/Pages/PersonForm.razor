@@ -1,0 +1,46 @@
+﻿@page "/newperson"
+
+@using BlazorCrud.Data
+@using System.Net.Http
+@using System.Net.Http.Json
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Add people</h3>
+
+<EditForm Model="@person">
+    <div class="container-fluid">
+        <div class="form-group row mb-1">
+            <label class="col-sm-3">First Name</label>
+            <div class="col-sm-9">
+                <InputText class="form-control" @bind-Value="@person.FirstName"></InputText>
+            </div>
+        </div>
+        <div class="form-group row mb-1">
+            <label class="col-sm-3">Last Name</label>
+            <div class="col-sm-9">
+                <InputText class="form-control" @bind-Value="@person.LastName"></InputText>
+            </div>
+        </div>
+
+        <div class="form-group row mb-1">
+            <div class="col-sm-9">
+                <button class="btn btn-primary" @onclick="Save">Save</button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    public string url = "/api/People";
+    Person person = new Person();
+    Response res = new Response();
+
+    private async Task Save()
+    {
+        var data = await Http.PostAsJsonAsync<Person>(url, person);
+        res = data.Content.ReadFromJsonAsync<Response>().Result;
+        NavigationManager.NavigateTo("/people");
+    }
+}

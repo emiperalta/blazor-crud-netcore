@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebServiceBlazorCrud.Models.Response
+namespace BlazorCrud.Data
 {
     public class Response
     {

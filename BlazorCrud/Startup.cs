@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -27,6 +28,14 @@ namespace BlazorCrud
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            var httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true; //to avoid certificate errors
+
+            services.AddSingleton(new HttpClient(httpClientHandler)
+            {
+                BaseAddress = new Uri("https://localhost:44396")
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

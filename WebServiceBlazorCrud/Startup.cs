@@ -26,6 +26,7 @@ namespace WebServiceBlazorCrud
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddCors();
         }
 
@@ -42,8 +43,7 @@ namespace WebServiceBlazorCrud
                 x
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
+                .AllowAnyMethod();
             });
 
             app.UseHttpsRedirection();

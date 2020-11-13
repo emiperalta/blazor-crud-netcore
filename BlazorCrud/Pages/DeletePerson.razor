@@ -1,0 +1,34 @@
+﻿@page "/deleteperson/{id:int}"
+
+@using Data
+@using System.Net.Http
+@using System.Net.Http.Json
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Delete Person</h3>
+
+<p>You will delete the person with ID = @id. Are you sure?</p>
+
+<div>
+    <button @onclick="Delete">Delete</button>
+    <button @onclick="Cancel">Cancel</button>
+</div>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    public string url = "/api/people";
+    Response<object> res = new Response<object>();
+
+    private async Task Delete()
+    {
+        var data = await Http.DeleteAsync(url + "/" + id);
+        res = data.Content.ReadFromJsonAsync<Response<object>>().Result;
+        NavigationManager.NavigateTo("/people");
+    }
+
+    private void Cancel() => NavigationManager.NavigateTo("/people");
+}
